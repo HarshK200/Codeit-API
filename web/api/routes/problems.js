@@ -1,7 +1,12 @@
 const express = require("express");
 const problemsRouter = express.Router();
-const { getProblems } = require("../controllers/ProblemsController.js");
+const {
+  getProblemsList,
+  getFullProblem,
+} = require("../controllers/ProblemsController.js");
 
-problemsRouter.get("/", getProblems);
+problemsRouter.get("/", getProblemsList);
+
+problemsRouter.get("/:id", getFullProblem);
 
 module.exports = problemsRouter;

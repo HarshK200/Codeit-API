@@ -1,13 +1,18 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-async function getProblems(req, res) {
+async function getProblemsList(req, res) {
   try {
     const problems = await prisma.problems.findMany({
-      take: 5,
+      select: {
+        id: true,
+        title: true,
+        difficulty: true,
+        AcceptanceRate: true,
+      },
     });
     res.status(200).json({
-      message: "Successfully retrivied first 5 problems form the database",
+      message: "Successfully retrivied all problems data form the database",
       problems: problems,
     });
   } catch (err) {
@@ -18,4 +23,26 @@ async function getProblems(req, res) {
   }
 }
 
-module.exports = { getProblems };
+async function getFullProblem(req, res) {
+  try {
+    const id = parseInt(req.params.id);
+
+    const fullProblem = await prisma.problems.findUnique({
+      where: {
+        id: id,
+      },
+    });
+
+    res.status(200).json({
+      message: "Successfully retrivied the problem form the database",
+      problem: fullProblem,
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({
+      message: "Err: something went wrong during getting the problems",
+    });
+  }
+}
+
+module.exports = { getProblemsList, getFullProblem };

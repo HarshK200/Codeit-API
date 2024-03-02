@@ -1,10 +1,16 @@
+-- CreateEnum
+CREATE TYPE "Difficulty" AS ENUM ('EASY', 'MEDIUM', 'HARD');
+
+-- CreateEnum
+CREATE TYPE "Role" AS ENUM ('USER', 'ADMIN');
+
 -- CreateTable
 CREATE TABLE "Users" (
     "id" TEXT NOT NULL,
-    "username" TEXT NOT NULL,
+    "Role" "Role" NOT NULL DEFAULT 'USER',
     "email" TEXT NOT NULL,
+    "username" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "isAdmin" BOOLEAN NOT NULL,
 
     CONSTRAINT "Users_pkey" PRIMARY KEY ("id")
 );
@@ -16,6 +22,9 @@ CREATE TABLE "Problems" (
     "description" TEXT NOT NULL,
     "examples" JSONB NOT NULL,
     "testCases" JSONB NOT NULL,
+    "difficulty" "Difficulty" NOT NULL,
+    "AcceptanceRate" DOUBLE PRECISION NOT NULL,
+    "isSolved" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "Problems_pkey" PRIMARY KEY ("id")
 );

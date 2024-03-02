@@ -34,7 +34,6 @@ async function signup(req, res) {
         username: username,
         email: email,
         password: hashedPassword,
-        isAdmin: false,
       },
     });
 

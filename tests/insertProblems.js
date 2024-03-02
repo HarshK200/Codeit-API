@@ -5,6 +5,8 @@ async function main() {
   await prisma.problems.createMany({
     data: [
       {
+        AcceptanceRate: 52.0,
+        difficulty: "EASY",
         title: "Two Sum",
         description:
           "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.\nYou may assume that each input would have exactly one solution, and you may not use the same element twice.\nYou can return the answer in any order.",
@@ -38,6 +40,8 @@ async function main() {
         },
       },
       {
+        AcceptanceRate: 61.6,
+        difficulty: "EASY",
         title: "Move Zeroes",
         description:
           "Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.\nNote that you must do this in-place without making a copy of the array.",

@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 
 async function main() {
   const problems = await prisma.problems.findMany();
-  console.log("problesms: ", problems);
+  console.log("problems: ", problems);
   const users = await prisma.users.findMany();
   console.log("users: ", users);
   const submission = await prisma.submissions.findMany();

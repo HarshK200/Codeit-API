@@ -9,8 +9,8 @@ const app = express();
 app.use(express.json());
 
 // Routes
-app.use("/user", userRouter);
-app.use("/problems", problemsRouter);
+app.use("/user", userRouter); // login and signup
+app.use("/problems", problemsRouter); // retive problems form the database "/" gives list of problems overview "/:id" gives full problem with description
 
 // auth Middleware needed for this route
 app.use("/submissions", auth, submissionsRouter);

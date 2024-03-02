@@ -14,7 +14,7 @@ function auth(req, res, next) {
     let user = jwt.verify(token, process.env.SECRET_KEY);
 
     // adding userId from the decoded token to req object
-    req.userId = user.id;
+    req.body.userId = user.id;
   } catch (err) {
     console.log(err);
     return res

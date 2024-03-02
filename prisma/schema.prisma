@@ -13,22 +13,36 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
+enum Difficulty {
+    EASY
+    MEDIUM
+    HARD
+}
+
+enum Role {
+    USER
+    ADMIN
+}
+
 model Users {
     id          String        @id @default(uuid())
-    username    String
+    Role        Role          @default(USER)
     email       String        @unique
+    username    String
     password    String
-    isAdmin     Boolean
     Submissions Submissions[] // Relation to all the Submissions of this user
 }
 
 model Problems {
-    id          Int           @id @default(autoincrement())
-    title       String
-    description String
-    examples    Json
-    testCases   Json // This is going to be a JSON string object with mulitple testcases
-    Submissions Submissions[] // Relation to the Submissions of this problem
+    id             Int           @id @unique @default(autoincrement())
+    title          String
+    description    String
+    examples       Json
+    testCases      Json // This is going to be a JSON string object with mulitple testcases
+    Submissions    Submissions[] // Relation to the Submissions of this problem
+    difficulty     Difficulty
+    AcceptanceRate Float
+    isSolved       Boolean       @default(false)
 }
 
 model Submissions {
