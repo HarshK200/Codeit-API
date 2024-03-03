@@ -3,6 +3,17 @@ const jwt = require("jsonwebtoken");
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
+async function getUser(req, res) {
+  const { userId } = req.body;
+  const user = await prisma.users.findUnique({
+    where: {
+      id: userId,
+    },
+  });
+
+  return res.status(200).json({ user: user });
+}
+
 async function signup(req, res) {
   try {
     // get the user email and password from the body
@@ -114,4 +125,4 @@ async function login(req, res) {
   }
 }
 
-module.exports = { signup, login };
+module.exports = { getUser, signup, login };

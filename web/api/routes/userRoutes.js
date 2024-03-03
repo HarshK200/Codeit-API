@@ -1,10 +1,9 @@
 const express = require("express");
 const userRouter = express.Router();
-const { signup, login } = require("../controllers/userControllers.js");
+const { signup, login, getUser } = require("../controllers/userControllers.js");
+const auth = require("../middlewares/auth.js");
 
-userRouter.get("/", (req, res) => {
-  res.status(200).send("<h1> This is root page of /user </h1>");
-});
+userRouter.get("/", auth, getUser);
 
 userRouter.post("/signup", signup);
 userRouter.post("/login", login);

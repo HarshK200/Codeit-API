@@ -3,31 +3,27 @@ const prisma = new PrismaClient();
 
 async function getSubmission(req, res) {
   try {
-    const { userId, problemID } = req.body;
+    const { userId } = req.body;
+    const problemId = parseInt(req.params.problemId);
+
     // Checking if the userID and problemID is provided or not
-    if (!userId || !problemID) {
+    if (!userId || !problemId) {
       return res.status(400).json({
         message: "Err: provide the userID and problemID",
         body: req.body,
       });
     }
 
-    const user = await prisma.users.findUnique({ where: { id: userId } });
-    if (!user) {
-      return res.status(400).json({
-        message: "Err: The user with the provided id doesn't exists",
-      });
-    }
-
     const usersProblemSubmissions = await prisma.submissions.findMany({
       where: {
         usersId: userId,
-        problemsId: problemID,
+        problemsId: problemId,
       },
     });
 
     return res.status(200).json({
-      message: `Successfully retrivied the users submissions for the current problem`,
+      message:
+        "Successfully retrivied the users submissions for the current problem",
       solutions: usersProblemSubmissions,
     });
   } catch (err) {
@@ -38,4 +34,46 @@ async function getSubmission(req, res) {
   }
 }
 
-module.exports = { getSubmission };
+async function postSubmission(req, res) {
+  try {
+    const { userId, answer } = req.body;
+    const problemId = parseInt(req.params.problemId);
+
+    const problem = await prisma.problems.findUnique({
+      where: {
+        id: problemId,
+      },
+    });
+
+    if (!problem) {
+      return res.status(404).json({
+        message: "Err: problem not found",
+      });
+    }
+
+    //TODO
+    let isCorrect = Math.random() < 0.5 ? "CA" : "WA";
+
+    let submission = await prisma.submissions.create({
+      data: {
+        answer: answer,
+        usersId: userId,
+        problemsId: problemId,
+        SubmissionStat: isCorrect ? "CORRECT" : "INCORRECT",
+      },
+    });
+
+    return res.status(201).json({
+      message: "Successfully submitted your answer",
+      submission: submission,
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({
+      message:
+        "Err: Something went wrong when trying to submit your submission",
+    });
+  }
+}
+
+module.exports = { getSubmission, postSubmission };

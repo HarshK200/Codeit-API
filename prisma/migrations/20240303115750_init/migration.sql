@@ -4,6 +4,9 @@ CREATE TYPE "Difficulty" AS ENUM ('EASY', 'MEDIUM', 'HARD');
 -- CreateEnum
 CREATE TYPE "Role" AS ENUM ('USER', 'ADMIN');
 
+-- CreateEnum
+CREATE TYPE "submissionStatus" AS ENUM ('CORRECT', 'INCORRECT');
+
 -- CreateTable
 CREATE TABLE "Users" (
     "id" TEXT NOT NULL,
@@ -33,6 +36,7 @@ CREATE TABLE "Problems" (
 CREATE TABLE "Submissions" (
     "id" TEXT NOT NULL,
     "answer" TEXT NOT NULL,
+    "SubmissionStat" "submissionStatus" NOT NULL,
     "usersId" TEXT NOT NULL,
     "problemsId" INTEGER NOT NULL,
 
@@ -41,6 +45,9 @@ CREATE TABLE "Submissions" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Users_email_key" ON "Users"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Problems_id_key" ON "Problems"("id");
 
 -- AddForeignKey
 ALTER TABLE "Submissions" ADD CONSTRAINT "Submissions_usersId_fkey" FOREIGN KEY ("usersId") REFERENCES "Users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

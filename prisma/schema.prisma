@@ -24,6 +24,11 @@ enum Role {
     ADMIN
 }
 
+enum submissionStatus {
+    CORRECT
+    INCORRECT
+}
+
 model Users {
     id          String        @id @default(uuid())
     Role        Role          @default(USER)
@@ -46,10 +51,11 @@ model Problems {
 }
 
 model Submissions {
-    id         String   @id @default(uuid())
-    answer     String
-    Users      Users    @relation(fields: [usersId], references: [id])
-    usersId    String
-    Problems   Problems @relation(fields: [problemsId], references: [id])
-    problemsId Int
+    id             String           @id @default(uuid())
+    answer         String
+    SubmissionStat submissionStatus
+    Users          Users            @relation(fields: [usersId], references: [id])
+    usersId        String
+    Problems       Problems         @relation(fields: [problemsId], references: [id])
+    problemsId     Int
 }

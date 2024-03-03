@@ -5,8 +5,9 @@ async function main() {
   await prisma.submissions.create({
     data: {
       problemsId: 1,
-      usersId: "90a8ebfb-40d9-4e66-9279-ad1affed0205",
+      usersId: "2b9fce45-9eb1-496e-8f33-e682057b1bf4",
       answer: "This is the answer for problem 1",
+      SubmissionStat: "CORRECT",
     },
   });
 }
