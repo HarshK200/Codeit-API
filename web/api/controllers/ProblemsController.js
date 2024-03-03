@@ -25,11 +25,11 @@ async function getProblemsList(req, res) {
 
 async function getFullProblem(req, res) {
   try {
-    const id = parseInt(req.params.id);
+    const problemId = parseInt(req.params.problemId);
 
     const fullProblem = await prisma.problems.findUnique({
       where: {
-        id: id,
+        id: problemId,
       },
     });
 

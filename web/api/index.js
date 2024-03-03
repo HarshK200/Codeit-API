@@ -1,21 +1,22 @@
 const express = require("express");
 const userRouter = require("./routes/userRoutes");
-const submissionsRouter = require("./routes/submissions");
-const problemsRouter = require("./routes/problems");
 const auth = require("./middlewares/auth");
+const { login, signup } = require("./controllers/userControllers");
+const problemsetRouter = require("./routes/problemset");
 const app = express();
 
 // Parsing all the req objects
 app.use(express.json());
 
 // Routes
-app.use("/user", userRouter); // login and signup
-app.use("/problems", problemsRouter); // retive problems form the database "/" gives list of problems overview "/:id" gives full problem with description
+app.use("/signup", signup);
+app.use("/login", login);
+app.use("/problemset", problemsetRouter);
 
-// auth Middleware needed for this route
-app.use("/submissions", auth, submissionsRouter);
+// auth Middleware needed for these route
+app.use("/user", auth, userRouter);
 
-// route to create a new problem
+// TODO route to create a new problem
 
 app.get("/", (req, res) => {
   res.status(200).send("<h1>Root Page</h1>");

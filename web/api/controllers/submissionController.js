@@ -1,7 +1,7 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-async function getSubmission(req, res) {
+async function getSubmissions(req, res) {
   try {
     const { userId } = req.body;
     const problemId = parseInt(req.params.problemId);
@@ -39,6 +39,10 @@ async function postSubmission(req, res) {
     const { userId, answer } = req.body;
     const problemId = parseInt(req.params.problemId);
 
+    if (!answer) {
+      return res.status(400).json({ message: "answer field is required" });
+    }
+
     const problem = await prisma.problems.findUnique({
       where: {
         id: problemId,
@@ -57,9 +61,9 @@ async function postSubmission(req, res) {
     let submission = await prisma.submissions.create({
       data: {
         answer: answer,
+        SubmissionStat: isCorrect ? "CORRECT" : "INCORRECT",
         usersId: userId,
         problemsId: problemId,
-        SubmissionStat: isCorrect ? "CORRECT" : "INCORRECT",
       },
     });
 
@@ -76,4 +80,4 @@ async function postSubmission(req, res) {
   }
 }
 
-module.exports = { getSubmission, postSubmission };
+module.exports = { getSubmissions, postSubmission };

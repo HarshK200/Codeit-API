@@ -47,7 +47,6 @@ model Problems {
     Submissions    Submissions[] // Relation to the Submissions of this problem
     difficulty     Difficulty
     AcceptanceRate Float
-    isSolved       Boolean       @default(false)
 }
 
 model Submissions {

@@ -27,7 +27,6 @@ CREATE TABLE "Problems" (
     "testCases" JSONB NOT NULL,
     "difficulty" "Difficulty" NOT NULL,
     "AcceptanceRate" DOUBLE PRECISION NOT NULL,
-    "isSolved" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "Problems_pkey" PRIMARY KEY ("id")
 );

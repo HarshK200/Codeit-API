@@ -9,6 +9,12 @@ async function getUser(req, res) {
     where: {
       id: userId,
     },
+    select: {
+      id: true,
+      username: true,
+      email: true,
+      Role: true,
+    },
   });
 
   return res.status(200).json({ user: user });
