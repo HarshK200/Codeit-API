@@ -8,7 +8,7 @@
     "test": "nodemon ./tests/test.js"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@prisma/client": "^5.10.2",
     "bcrypt": "^5.1.1",
