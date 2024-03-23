@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./web/api/index.js",
+    "start": "nodemon ./api/index.js",
     "test": "nodemon ./tests/test.js"
   },
   "author": "",

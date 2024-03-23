@@ -16,7 +16,7 @@ app.use("/problemset", problemsetRouter);
 // auth Middleware needed for these route
 app.use("/user", auth, userRouter);
 
-// TODO route to create a new problem
+// TODO make route to create a new problem
 
 app.get("/", (req, res) => {
   res.status(200).send("<h1>Root Page</h1>");
