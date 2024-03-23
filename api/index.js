@@ -4,9 +4,11 @@ const auth = require("./middlewares/auth");
 const { login, signup } = require("./controllers/userControllers");
 const problemsetRouter = require("./routes/problemset");
 const app = express();
+const cors = require("cors");
 
 // Parsing all the req objects
 app.use(express.json());
+app.use(cors());
 
 // Routes
 app.use("/signup", signup);
