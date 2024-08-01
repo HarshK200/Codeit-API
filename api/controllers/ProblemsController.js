@@ -33,12 +33,18 @@ async function getFullProblem(req, res) {
       },
     });
 
+    if (!fullProblem) {
+      return res.status(404).json({
+        status:404,
+        message: "Err: Problem not found in the DB",
+      });
+    }
+
     res.status(200).json({
-      message: "Successfully retrivied the problem form the database",
+      message: "Successfully retrivied the problem from the database",
       problem: fullProblem,
     });
   } catch (err) {
-    console.log(err);
     return res.status(500).json({
       message: "Err: something went wrong during getting the problems",
     });

@@ -54,20 +54,12 @@ async function signup(req, res) {
       },
     });
 
-    // generate token
-    const token = jwt.sign(
-      { id: newUser.id, username: newUser.username, email: newUser.email },
-      process.env.SECRET_KEY,
-    );
-
     res.status(201).json({
       message: `Successfully registered new user ${newUser.username} with email ${newUser.email}`,
       user: {
-        userID: newUser.id,
         username: newUser.username,
         email: newUser.email,
       },
-      token: token, // This token is to be saved in browser's local storage for future API calls (IMPLEMENT ON THE FRONT-END SIDE)
     });
   } catch (err) {
     console.log(err);

@@ -24,7 +24,7 @@ async function auth(req, res, next) {
     if (!isUser) {
       return res
         .status(404)
-        .json({ message: "No user exists with provided id" });
+        .json({ message: "Invalid Token: No user exists with provided id" });
     }
 
     // adding userId from the decoded token to req object

@@ -1,0 +1,92 @@
+problems:  [
+  {
+    id: 1,
+    title: 'Two Sum',
+    description: 'Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.\n' +
+      'You may assume that each input would have exactly one solution, and you may not use the same element twice.\n' +
+      'You can return the answer in any order.',
+    examples: { '0': [Object], '1': [Object], '2': [Object] },
+    testCases: { '0': [Object], '1': [Object], '2': [Object] },
+    difficulty: 'EASY',
+    AcceptanceRate: 52
+  },
+  {
+    id: 2,
+    title: 'Move Zeroes',
+    description: "Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.\n" +
+      'Note that you must do this in-place without making a copy of the array.',
+    examples: { '0': [Object], '1': [Object] },
+    testCases: { '0': [Object], '1': [Object] },
+    difficulty: 'EASY',
+    AcceptanceRate: 61.6
+  }
+]
+
+users:  [
+  {
+    id: '6ae5007a-0c03-4476-8c2b-096a11acfd4d',
+    Role: 'USER',
+    email: 'test1@gmail.com',
+    username: 'test1',
+    password: '$2b$10$0ANZ9mAzPThxtVx3jruqXuNh.FnbivvmMIzrCRjsIctW.F32y9OAu'
+  },
+  {
+    id: '48b64603-a24e-4467-995f-cf6fc9e589d4',
+    Role: 'USER',
+    email: 'test2@gmail.com',
+    username: 'test2',
+    password: '$2b$10$eV9en1QWezms0Ua/yEsL/e9dGKr9xiiqdQzA0P2jQi2MxUrnkMcSG'
+  },
+  {
+    id: 'b506a721-c784-4567-a40e-ae803b3f74a3',
+    Role: 'USER',
+    email: 'testuser@gmail.com',
+    username: 'testuser',
+    password: '$2b$10$lzKE9UOMiXwhM0BU5506dO/YZc7FiWZn4y6P0pB7n0usJmJl5wlDC'
+  },
+  {
+    id: '1f07e310-6914-468b-88da-78ceeee995b8',
+    Role: 'USER',
+    email: 'testuser3@gmail.com',
+    username: 'testuser3',
+    password: '$2b$10$U2mHtbeUkw1nOvpQYaOTqetGBjP2qT3L/2d2BwRBkFteuvLEKwyeu'
+  },
+  {
+    id: '3bd2831d-6c3c-4fc2-b7bb-555ab52d18f5',
+    Role: 'USER',
+    email: 'reacttest@gmail.com',
+    username: 'react-test',
+    password: '$2b$10$z8JpQ4lERBdgqvswq6Dy7eFO8zFLsgJh0nq.vX22H96sDHohD9AN.'
+  },
+  {
+    id: '35acf0be-ff53-42c8-a439-9f942f03aaa0',
+    Role: 'USER',
+    email: 'reacttest_1@gmail.com',
+    username: 'react-test_1',
+    password: '$2b$10$kMCKWesWs19N7ZCcxx2DA./LYtiYDbBrD80k78.ASbPjDxbl8xST2'
+  }
+]
+
+submissions:  [
+  {
+    id: '2010a39a-2880-4ca0-ba83-8210fa331c82',
+    answer: '#include <iostream> using std::cout; using std::cin; int main() {return 0}',
+    SubmissionStat: 'CORRECT',
+    usersId: '6ae5007a-0c03-4476-8c2b-096a11acfd4d',
+    problemsId: 1
+  },
+  {
+    id: '8a04ebfa-1ff7-41c4-9d49-f46479fc1413',
+    answer: '#include <iostream> THIS IS SOLUTION 1 FOR PROBLEM 2',
+    SubmissionStat: 'CORRECT',
+    usersId: '6ae5007a-0c03-4476-8c2b-096a11acfd4d',
+    problemsId: 2
+  },
+  {
+    id: '6ba4a445-0500-41da-923c-ef794d2207ab',
+    answer: '#include <iostream> THIS IS SOLUTION 2 FOR PROBLEM 2',
+    SubmissionStat: 'CORRECT',
+    usersId: '6ae5007a-0c03-4476-8c2b-096a11acfd4d',
+    problemsId: 2
+  }
+]
