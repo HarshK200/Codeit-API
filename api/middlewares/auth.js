@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 
 async function auth(req, res, next) {
   try {
+    // console.log(req.headers.authorization_token)
     let token = req.headers.authorization_token;
     if (!token) {
       return res
@@ -32,8 +33,8 @@ async function auth(req, res, next) {
   } catch (err) {
     console.log(err);
     return res
-      .status(400)
-      .json({ message: "Some err occured during authorization" });
+      .status(401)
+      .json({ message: "lacking proper authentication credentials or invalid credentials jwt couldn't verify" });
   }
 
   // Calling the next handler after this
