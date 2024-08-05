@@ -1,6 +1,5 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
-const jwt = require("jsonwebtoken");
 
 async function main() {
   const problems = await prisma.problems.findMany();

@@ -36,7 +36,7 @@ async function signup(req, res) {
     });
     if (User) {
       return res.status(400).json({
-        message: `Err: A User with the email ${email} is already registered`,
+        message: `Err: Email ${email} is already registered`,
       });
     }
 
