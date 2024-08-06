@@ -2,7 +2,7 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 async function main() {
-  await prisma.problems.createMany({
+  const result = await prisma.problems.createMany({
     data: [
       {
         AcceptanceRate: 52.0,
@@ -12,15 +12,18 @@ async function main() {
           "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.\nYou may assume that each input would have exactly one solution, and you may not use the same element twice.\nYou can return the answer in any order.",
         examples: {
           0: {
-            input: { nums: [2, 7, 11, 15], target: 9 },
+            input: [2, 7, 11, 15],
+            target: 9,
             output: [0, 1],
           },
           1: {
-            input: { nums: [3, 2, 4], target: 6 },
+            input: [3, 2, 4],
+            target: 6,
             output: [1, 2],
           },
           2: {
-            input: { nums: [3, 3], target: 6 },
+            input: [3, 3],
+            target: 6,
             output: [0, 1],
           },
         },
@@ -38,6 +41,12 @@ async function main() {
             target: 6,
           },
         },
+        StarterCode:
+          "//Write your code here\n" +
+          "function solution(nums) {\n" +
+          "\t\n" +
+          "}\n\n" +
+          "export default solution;",
       },
       {
         AcceptanceRate: 61.6,
@@ -63,9 +72,16 @@ async function main() {
             input: [0],
           },
         },
+        StarterCode:
+          "//Write your code here\n" +
+          "function solution(nums) {\n" +
+          "\t\n" +
+          "}\n\n" +
+          "export default solution;",
       },
     ],
   });
+  console.log(result);
 }
 
 try {

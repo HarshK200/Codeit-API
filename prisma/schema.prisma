@@ -47,6 +47,7 @@ model Problems {
     Submissions    Submissions[] // Relation to the Submissions of this problem
     difficulty     Difficulty
     AcceptanceRate Float
+    StarterCode    String // Starter code for this problem
 }
 
 model Submissions {

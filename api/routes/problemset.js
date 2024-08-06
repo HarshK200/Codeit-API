@@ -14,6 +14,6 @@ problemsetRouter.get("/", getProblemsList);
 problemsetRouter.get("/:problemId", getFullProblem);
 
 problemsetRouter.get("/:problemId/submissions", auth, getSubmissions);
-problemsetRouter.post("/:problemId/submissions", auth, postSubmission);
+problemsetRouter.post("/:problemId/submit", auth, postSubmission);
 
 module.exports = problemsetRouter;

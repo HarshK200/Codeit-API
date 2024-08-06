@@ -40,7 +40,7 @@ async function postSubmission(req, res) {
     const problemId = parseInt(req.params.problemId);
 
     if (!answer) {
-      return res.status(400).json({ message: "answer field is required" });
+      return res.status(400).json({ message: "an answer is required!" });
     }
 
     const problem = await prisma.problems.findUnique({
@@ -55,8 +55,8 @@ async function postSubmission(req, res) {
       });
     }
 
-    //TODO
-    let isCorrect = Math.random() < 0.5 ? "CA" : "WA";
+    //TODO: send code to a DOCKER CONTAINER and execute it there and then get the answer back depending on that set the isCorrect variable
+    isCorrect = false;
 
     let submission = await prisma.submissions.create({
       data: {
@@ -75,7 +75,7 @@ async function postSubmission(req, res) {
     console.log(err);
     return res.status(500).json({
       message:
-        "Err: Something went wrong when trying to submit your submission",
+        "Server Error: Something went wrong when trying to submit your submission",
     });
   }
 }
