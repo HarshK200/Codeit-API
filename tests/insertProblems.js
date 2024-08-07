@@ -45,8 +45,7 @@ async function main() {
           "//Write your code here\n" +
           "function solution(nums) {\n" +
           "\t\n" +
-          "}\n\n" +
-          "export default solution;",
+          "}\n\n",
       },
       {
         AcceptanceRate: 61.6,
@@ -76,8 +75,7 @@ async function main() {
           "//Write your code here\n" +
           "function solution(nums) {\n" +
           "\t\n" +
-          "}\n\n" +
-          "export default solution;",
+          "}\n\n",
       },
     ],
   });

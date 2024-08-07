@@ -8,8 +8,10 @@ services:
     ports:
       - 3000:3000
     volumes:
+      - /home/harsh/.docker/desktop/docker.sock:/var/run/docker.sock
       - .:/app
       - /app/node_modules
+    privileged: true
     env_file:
       - .env
     depends_on:

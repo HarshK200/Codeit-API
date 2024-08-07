@@ -1,1 +1,21 @@
-{ count: 2 }
+PrismaClientKnownRequestError: 
+Invalid `prisma.problems.deleteMany()` invocation in
+/app/tests/deleteall_db_problems.js:5:40
+
+  2 const prisma = new PrismaClient();
+  3 
+  4 async function main() {
+→ 5   const result = await prisma.problems.deleteMany(
+Foreign key constraint failed on the field: `Submissions_problemsId_fkey (index)`
+    at _n.handleRequestError (/app/node_modules/@prisma/client/runtime/library.js:123:6854)
+    at _n.handleAndLogRequestError (/app/node_modules/@prisma/client/runtime/library.js:123:6188)
+    at _n.request (/app/node_modules/@prisma/client/runtime/library.js:123:5896)
+    at async l (/app/node_modules/@prisma/client/runtime/library.js:128:10871)
+    at async main (/app/tests/deleteall_db_problems.js:5:18) {
+  code: 'P2003',
+  clientVersion: '5.10.2',
+  meta: {
+    modelName: 'Problems',
+    field_name: 'Submissions_problemsId_fkey (index)'
+  }
+}
