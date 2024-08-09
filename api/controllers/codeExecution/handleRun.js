@@ -68,7 +68,7 @@ async function runCode(userCode, language, problemTitle, testcases) {
     await new Promise((resolve, reject) => {
       container.logs(
         {
-          follow: true,
+          follow: false,
           stdout: true,
           stderr: true,
         },
