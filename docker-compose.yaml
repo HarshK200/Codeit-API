@@ -11,10 +11,25 @@ services:
       - ./server:/app
       - /app/node_modules
     env_file:
-      - ./server/.env
+      - ./.env
     depends_on:
       postgres:
         condition: service_healthy
+      rabbitmq:
+        condition: service_completed_successfully
+
+  worker:
+    build:
+      context: ./worker
+      dockerfile: Dockerfile
+      target: development
+    env_file:
+      - ./.env
+    volumes:
+      - ./worker:/worker
+    depends_on:
+      rabbitmq:
+        condition: service_completed_successfully
 
   postgres:
     image: postgres:latest

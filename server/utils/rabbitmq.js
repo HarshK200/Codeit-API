@@ -5,7 +5,7 @@ let connection;
 let channel;
 
 async function connectToRabbitMQ() {
-  connection = await ampq.connect("amqp://rabbitmq:5672");
+  connection = await ampq.connect(process.env.RABBITMQ_URL);
 
   connection.on("connect", () => {
     console.log("Connected");

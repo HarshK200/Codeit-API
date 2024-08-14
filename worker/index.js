@@ -4,7 +4,7 @@ import fs from "node:fs";
 import child_process from "node:child_process";
 
 try {
-  const connection = await connect("amqp://localhost:5672");
+  const connection = await connect(process.env.RABBITMQ_URL);
 
   connection.on("connect", () => {
     console.log("Connected");
