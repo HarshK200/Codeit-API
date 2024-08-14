@@ -16,7 +16,7 @@ services:
       postgres:
         condition: service_healthy
       rabbitmq:
-        condition: service_completed_successfully
+        condition: service_healthy
 
   worker:
     build:
@@ -28,8 +28,10 @@ services:
     volumes:
       - ./worker:/worker
     depends_on:
+      postgres:
+        condition: service_healthy
       rabbitmq:
-        condition: service_completed_successfully
+        condition: service_healthy
 
   postgres:
     image: postgres:latest
@@ -54,6 +56,12 @@ services:
       - 5672:5672
       - 15672:15672
     restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "rabbitmq-diagnostics -q check_running"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 5s
 
 volumes:
   postgres-data-codeit:
