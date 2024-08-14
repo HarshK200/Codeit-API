@@ -60,7 +60,7 @@ async function postSubmission(req, res) {
       userId: userId,
       answer: answer,
       language: language,
-      problemid: problemId,
+      problem: problem,
     };
 
     //TODO: Enqueue the code to rabbitmq
