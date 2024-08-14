@@ -2,18 +2,16 @@ name: "codeit-backend-dev"
 services:
   codeit-backend:
     build:
-      context: .
+      context: ./server
       dockerfile: Dockerfile
       target: development
     ports:
       - 3000:3000
     volumes:
-      - /home/harsh/.docker/desktop/docker.sock:/var/run/docker.sock
-      - .:/app
+      - ./server:/app
       - /app/node_modules
-    privileged: true
     env_file:
-      - .env
+      - ./server/.env
     depends_on:
       postgres:
         condition: service_healthy
@@ -34,6 +32,13 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+
+  rabbitmq:
+    image: rabbitmq:3.9-management
+    ports:
+      - 5672:5672
+      - 15672:15672
+    restart: always
 
 volumes:
   postgres-data-codeit:

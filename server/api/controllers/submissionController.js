@@ -1,5 +1,5 @@
 const { PrismaClient } = require("@prisma/client");
-const { runCode } = require("./codeExecution/handleRun.js");
+const { sendMessage } = require("../../utils/rabbitmq");
 const prisma = new PrismaClient();
 
 async function getSubmissions(req, res) {
@@ -37,7 +37,6 @@ async function getSubmissions(req, res) {
 
 async function postSubmission(req, res) {
   try {
-    // console.log(req.body)
     const { userId, answer, language } = req.body;
     const problemId = parseInt(req.params.problemId);
 
@@ -57,14 +56,17 @@ async function postSubmission(req, res) {
       });
     }
 
-    //TODO: send code to a DOCKER CONTAINER and execute it there and then get the answer back depending on that set the isCorrect variable
-    const result = await runCode(
-      answer,
-      language,
-      problem.title.toLowerCase().replace(" ", ""),
-      JSON.stringify(problem.testCases),
-    );
-    console.log(result);
+    const data = {
+      userId: userId,
+      answer: answer,
+      language: language,
+      problemid: problemId,
+    };
+
+    //TODO: Enqueue the code to rabbitmq
+    sendMessage(data);
+
+    let isCorrect = true;
 
     // let submission = await prisma.submissions.create({
     //   data: {
@@ -74,20 +76,9 @@ async function postSubmission(req, res) {
     //     problemsId: problemId,
     //   },
     // });
-    if (!result?.result && result.consoleLogs) {
-      return res.status(403).json({
-        message: "some error occured during run time, check the console",
-        result: result.result,
-        consoleLogs: result.consoleLogs,
-      });
-    }
 
-    return res.status(201).json({
-      message: "Code ran Successfully on the backend!!! WOOOOOOOOoo",
-      result: result.result,
-      consoleLogs: result.consoleLogs,
-      // submission: submission,
-    });
+    console.log(data);
+    res.status(200).json({ message: "The submission was successful" });
   } catch (err) {
     console.log(err);
     return res.status(501).json({
