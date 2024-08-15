@@ -56,28 +56,27 @@ async function postSubmission(req, res) {
       });
     }
 
-    const data = {
-      userId: userId,
-      answer: answer,
-      language: language,
-      problem: problem,
-    };
-
-    //TODO: Enqueue the code to rabbitmq
-    sendMessage(data);
-
-    let isCorrect = true;
-
     // let submission = await prisma.submissions.create({
     //   data: {
     //     answer: answer,
-    //     SubmissionStat: isCorrect ? "CORRECT" : "INCORRECT",
+    //     SubmissionStat: "PENDING",
     //     usersId: userId,
     //     problemsId: problemId,
     //   },
     // });
 
-    console.log(data);
+    const data = {
+      userId: userId,
+      answer: answer,
+      language: language,
+      problem: problem,
+      // submissionId: submission.id,
+    };
+
+    //TODO: Enqueue the code to rabbitmq
+    sendMessage(data);
+
+    // console.log(data);
     res.status(200).json({ message: "The submission was successful" });
   } catch (err) {
     console.log(err);

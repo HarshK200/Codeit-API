@@ -27,6 +27,7 @@ enum Role {
 enum submissionStatus {
     CORRECT
     INCORRECT
+    PENDING
 }
 
 model Users {

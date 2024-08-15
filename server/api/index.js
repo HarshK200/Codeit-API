@@ -5,20 +5,24 @@ const { login, signup } = require("./controllers/userControllers");
 const problemsetRouter = require("./routes/problemset");
 const app = express();
 const cors = require("cors");
+const { updateExecutionState } = require("./controllers/updateExecutionState");
 
 // Parsing all the req objects
 app.use(express.json());
 app.use(cors());
 
 // Routes
-app.use("/signup", signup);
-app.use("/login", login);
+app.post("/signup", signup);
+app.post("/login", login);
 app.use("/problemset", problemsetRouter);
 
 // auth Middleware needed for these route
 app.use("/user", auth, userRouter);
 
 // TODO make route to create a new problem
+
+// TODO: add route/webhook where the worker will hit after it's done executing user code (This route updates the data base)
+app.post("/execution_finished", updateExecutionState);
 
 app.get("/", (req, res) => {
   res.status(200).send("<h1>Root Page</h1>");

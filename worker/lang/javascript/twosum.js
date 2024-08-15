@@ -1,4 +1,5 @@
 export default function getExecutionCode(data) {
+  //TODO: check which language it is and then use attach the code accordingly
   const codeToAppend = `
 const testcases = ${JSON.stringify(data.problem.testCases)};
 let result = {};
