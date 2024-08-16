@@ -41,7 +41,11 @@ async function postSubmission(req, res) {
     const problemId = parseInt(req.params.problemId);
 
     if (!answer) {
-      return res.status(400).json({ message: "an answer is required!" });
+      return res.status(400).json({ message: "Err: no answer provided" });
+    }
+
+    if (!language) {
+      return res.status(400).json({ message: "Err: no langauge specified" });
     }
 
     const problem = await prisma.problems.findUnique({
@@ -56,27 +60,26 @@ async function postSubmission(req, res) {
       });
     }
 
-    // let submission = await prisma.submissions.create({
-    //   data: {
-    //     answer: answer,
-    //     SubmissionStat: "PENDING",
-    //     usersId: userId,
-    //     problemsId: problemId,
-    //   },
-    // });
+    let submission = await prisma.submissions.create({
+      data: {
+        answer: answer,
+        SubmissionStat: "PENDING",
+        usersId: userId,
+        problemsId: problemId,
+      },
+    });
 
     const data = {
       userId: userId,
       answer: answer,
       language: language,
       problem: problem,
-      // submissionId: submission.id,
+      submissionId: submission.id,
     };
 
-    //TODO: Enqueue the code to rabbitmq
+    // Enqueue the code to rabbitmq
     sendMessage(data);
 
-    // console.log(data);
     res.status(200).json({ message: "The submission was successful" });
   } catch (err) {
     console.log(err);

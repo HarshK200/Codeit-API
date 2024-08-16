@@ -11,6 +11,8 @@ async function connectToRabbitMQ() {
     console.log("Connected");
   });
 
+
+
   connection.on("disconnect", (err) => {
     console.log("Disconnected", err);
   });

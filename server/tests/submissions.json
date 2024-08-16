@@ -1,0 +1,45 @@
+[
+  {
+    "id": "d2a40c76-295f-48c6-a46c-380a87317cbb",
+    "answer": "//Write your code here\nconsole.log(\"test from the front end\")\nfunction solution(nums) {\n  return [0,1];\n}\n\n",
+    "SubmissionStat": "PENDING",
+    "usersId": "30caaf8d-50ae-4ea6-a21d-72c5ee81703e",
+    "problemsId": 1
+  },
+  {
+    "id": "013539ba-7c9c-4e49-866d-4ca117412688",
+    "answer": "//Write your code here\nconsole.log(\"test from the front end\")\nfunction solution(nums) {\n  return [0,1];\n}\n\n",
+    "SubmissionStat": "PENDING",
+    "usersId": "30caaf8d-50ae-4ea6-a21d-72c5ee81703e",
+    "problemsId": 1
+  },
+  {
+    "id": "cefc79b8-729e-4804-804d-df572c2edf31",
+    "answer": "//Write your code here\nconsole.log(\"test from the front end\")\nfunction solution(nums) {\n  return [0,1];\n}\n\n",
+    "SubmissionStat": "PENDING",
+    "usersId": "30caaf8d-50ae-4ea6-a21d-72c5ee81703e",
+    "problemsId": 1
+  },
+  {
+    "id": "1f7216e5-a56f-419e-b6dd-db225a05b208",
+    "answer": "//Write your code here\nconsole.log(\"test from the front end\")\nfunction solution(nums) {\n  return [0,1];\n}\n\n",
+    "SubmissionStat": "PENDING",
+    "usersId": "30caaf8d-50ae-4ea6-a21d-72c5ee81703e",
+    "problemsId": 1
+  },
+  {
+    "id": "6f5daa8e-b919-42d0-9d5c-f71868ae1f11",
+    "answer": "//Write your code here\nconsole.log(\"test from the front end\")\nfunction solution(nums) {\n  return [0,1];\n}\n\n",
+    "SubmissionStat": "PENDING",
+    "usersId": "30caaf8d-50ae-4ea6-a21d-72c5ee81703e",
+    "problemsId": 1
+  },
+  {
+    "id": "a35e76d7-5518-49f0-8a23-2a26f292ef4c",
+    "answer": "//Write your code here\nconsole.log(\"test from the front end\")\nfunction solution(nums) {\n  return [0,1];\n}\n\n",
+    "SubmissionStat": "INCORRECT",
+    "usersId": "30caaf8d-50ae-4ea6-a21d-72c5ee81703e",
+    "problemsId": 1
+  }
+]
+

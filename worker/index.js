@@ -22,7 +22,6 @@ try {
   console.log("listening to messages....");
   // getting the data from the queue
   channel.consume(QUEUE, async (msg) => {
-
     const data = JSON.parse(msg.content.toString());
 
     // appending testcases to the code to make it executable
@@ -34,10 +33,20 @@ try {
     child_process.exec("node temp/solution.js", async (err, stdout, stderr) => {
       if (err) {
         console.log(err);
-        await axios.post(process.env.WEBHOOK_URL, {
-          stdout: stdout,
-          stderr: stderr,
+        let testCasesResult = {};
+        Object.keys(data.problem.testCases).map((key) => {
+          testCasesResult[key] = { passed: false };
         });
+        try {
+          await axios.post(process.env.WEBHOOK_URL, {
+            result: result,
+            stdout: stdout,
+            stderr: stderr,
+            submissionId: data.submissionId, // TODO
+          });
+        } catch (e) {
+          console.log("rabbit mq disconnect");
+        }
         return;
       }
 
@@ -60,17 +69,21 @@ try {
         }
       });
       await fs.promises.rm("temp", { recursive: true });
-      await axios.post(process.env.WEBHOOK_URL, {
-        result: JSON.stringify(testCasesResult),
-        stdout: stdout,
-        // submissionId: data.submissionId, // TODO
-      });
+      try {
+        await axios.post(process.env.WEBHOOK_URL, {
+          result: JSON.stringify(testCasesResult),
+          stdout: stdout,
+          submissionId: data.submissionId, // TODO
+        });
+      } catch (e) {
+        console.log("rabbit mq disconnect");
+      }
     });
 
     channel.ack(msg);
   });
 } catch (err) {
-  // console.log(err);
+  console.log(err);
 }
 
 function arraysEqual(arr1, arr2) {
