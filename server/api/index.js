@@ -5,7 +5,10 @@ const { login, signup } = require("./controllers/userControllers");
 const problemsetRouter = require("./routes/problemset");
 const app = express();
 const cors = require("cors");
-const { updateExecutionState } = require("./controllers/updateExecutionState");
+const {
+  updateExecutionState,
+  getSubmissionState,
+} = require("./controllers/updateExecutionState");
 
 // Parsing all the req objects
 app.use(express.json());
@@ -21,8 +24,11 @@ app.use("/user", auth, userRouter);
 
 // TODO make route to create a new problem
 
-// TODO: add route/webhook where the worker will hit after it's done executing user code (This route updates the data base)
+// WIP: add route/webhook where the worker will hit after it's done executing user code (This route updates the data base)
 app.post("/execution_finished", updateExecutionState);
+
+// WIP: route for client side polling to check if the submission is pending or not
+app.post("/submissionState", auth, getSubmissionState);
 
 app.get("/", (req, res) => {
   res.status(200).send("<h1>Root Page</h1>");

@@ -66,6 +66,7 @@ async function postSubmission(req, res) {
         SubmissionStat: "PENDING",
         usersId: userId,
         problemsId: problemId,
+        testCasesResult: "PENDING",
       },
     });
 
@@ -80,7 +81,10 @@ async function postSubmission(req, res) {
     // Enqueue the code to rabbitmq
     sendMessage(data);
 
-    res.status(200).json({ message: "The submission was successful" });
+    res.status(200).json({
+      message: "The submission was successful",
+      submissionId: submission.id,
+    });
   } catch (err) {
     console.log(err);
     return res.status(501).json({

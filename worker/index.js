@@ -42,7 +42,7 @@ try {
             result: result,
             stdout: stdout,
             stderr: stderr,
-            submissionId: data.submissionId, // TODO
+            submissionId: data.submissionId,
           });
         } catch (e) {
           console.log("rabbit mq disconnect");
@@ -73,7 +73,7 @@ try {
         await axios.post(process.env.WEBHOOK_URL, {
           result: JSON.stringify(testCasesResult),
           stdout: stdout,
-          submissionId: data.submissionId, // TODO
+          submissionId: data.submissionId,
         });
       } catch (e) {
         console.log("rabbit mq disconnect");
