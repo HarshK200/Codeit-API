@@ -72,14 +72,15 @@ async function signup(req, res) {
 async function login(req, res) {
   try {
     // get the user's email and password from the body
-    const { email, password } = req.body;
-    if (!email || !password) {
+    const { username, email, password } = req.body;
+    if (!username || !email || !password) {
       return res.status(400).json({ message: "Err: All fields are required" });
     }
 
     // check if the user exists in the database
     const existingUser = await prisma.users.findUnique({
       where: {
+        username: username,
         email: email,
       },
     });
