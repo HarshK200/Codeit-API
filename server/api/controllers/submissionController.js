@@ -67,6 +67,8 @@ async function postSubmission(req, res) {
         usersId: userId,
         problemsId: problemId,
         testCasesResult: "PENDING",
+        stdout: "PENDING",
+        stderr: "PENDING",
       },
     });
 

@@ -15,13 +15,12 @@ export default function executeCode(data) {
     child_process.exec("node temp/solution.js", async (err, stdout, stderr) => {
       // In case of execution err for e.g. Syntax err
       if (err) {
-        console.log("Err: executing solution.js", err);
         let testCasesResult = {};
         Object.keys(data.problem.testCases).map((key) => {
           testCasesResult[key] = { passed: false };
         });
         const executionResult = {
-          result: testCasesResult,
+          result: JSON.stringify(testCasesResult),
           stdout: stdout,
           stderr: stderr,
           submissionId: data.submissionId,
@@ -29,6 +28,7 @@ export default function executeCode(data) {
         // remove temp directory
         await fs.promises.rm("temp", { recursive: true });
         resolve(executionResult);
+        return;
       }
 
       // if no err and code executes successfully: Read the result.json
@@ -37,7 +37,10 @@ export default function executeCode(data) {
 
       let testCasesResult = {};
       Object.keys(data.problem.testCases).map((key) => {
-        if (arraysEqual(data.problem.testCases[key].output, result[key])) {
+        if (
+          Array.isArray(result[key]) &&
+          arraysEqual(data.problem.testCases[key].output, result[key])
+        ) {
           testCasesResult[key] = {
             passed: true,
             expected_output: data.problem.testCases[key].output,
@@ -60,7 +63,7 @@ export default function executeCode(data) {
       const executionResult = {
         result: JSON.stringify(testCasesResult),
         stdout: stdout,
-        // no stderr since execution didn't give any err
+        stderr: stderr,
         submissionId: data.submissionId,
       };
       // console.log(executionResult);
@@ -72,6 +75,10 @@ export default function executeCode(data) {
 
 // helper function
 function arraysEqual(arr1, arr2) {
-  if (arr1.length !== arr2.length) return false;
-  return arr1.every((element, index) => element === arr2[index]);
+  try {
+    if (arr1.length !== arr2.length) return false;
+    return arr1.every((element, index) => element === arr2[index]);
+  } catch (e) {
+    console.log("Err comparing arrays: ", e);
+  }
 }

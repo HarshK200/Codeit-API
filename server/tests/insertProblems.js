@@ -47,8 +47,8 @@ async function main() {
         StarterCode:
           "//Write your code here\n" +
           "function solution(nums) {\n" +
-          "\t\n" +
-          "}\n\n",
+          "  \n" +
+          "}",
       },
       {
         AcceptanceRate: 61.6,
@@ -77,8 +77,8 @@ async function main() {
         StarterCode:
           "//Write your code here\n" +
           "function solution(nums) {\n" +
-          "\t\n" +
-          "}\n\n",
+          "  \n" +
+          "}",
       },
     ],
   });

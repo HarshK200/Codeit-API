@@ -15,7 +15,6 @@ async function updateExecutionState(req, res) {
   const data = req.body;
   const result = data.result;
   let isCorrect = true;
-  console.log(data)
   Object.keys(result).map((key) => {
     if (!result[key].passed) {
       isCorrect = false;
@@ -23,7 +22,6 @@ async function updateExecutionState(req, res) {
     }
   });
 
-  console.log(data);
   await prisma.submissions.update({
     where: {
       id: data.submissionId,
@@ -31,9 +29,10 @@ async function updateExecutionState(req, res) {
     data: {
       SubmissionStat: isCorrect ? "CORRECT" : "INCORRECT",
       testCasesResult: data.result,
+      stdout: data.stdout,
+      stderr: data.stderr,
     },
   });
-  console.log("sucessfully updated submission state");
 }
 
 async function getSubmissionState(req, res) {

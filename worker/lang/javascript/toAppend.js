@@ -1,4 +1,3 @@
-// NOTE: assuming ```testcases Object``` are appended beforehand
 let result = {};
 Object.keys(testcases).map((key) => {
   result[key] = solution(testcases[key].nums);
