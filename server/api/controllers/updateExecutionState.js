@@ -3,20 +3,27 @@ const prisma = new PrismaClient();
 
 // IMPORTANT! only accessed by the worker node
 async function updateExecutionState(req, res) {
+  /*
+  data Object = {
+      result: Object,
+      stdout: stdout,
+      stderr: stderr,
+      submissionId: data.submissionId,
+  }
+*/
+
   const data = req.body;
   const result = data.result;
-  // console.log(data);
-  // console.log("STDOUT: ", data.stdout);
-  // console.log(JSON.parse(data.result));
   let isCorrect = true;
+  console.log(data)
   Object.keys(result).map((key) => {
     if (!result[key].passed) {
       isCorrect = false;
       return;
     }
   });
+
   console.log(data);
-  // TODO: change this to upsert
   await prisma.submissions.update({
     where: {
       id: data.submissionId,
