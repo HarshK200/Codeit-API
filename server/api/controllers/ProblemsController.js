@@ -31,11 +31,24 @@ async function getFullProblem(req, res) {
       where: {
         id: problemId,
       },
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        examples: true,
+        testCases: true,
+        Submissions: true,
+        difficulty: true,
+        AcceptanceRate: true,
+        StarterCode: true,
+        langSupport: true,
+        ProblemEvalCode: false,
+      },
     });
 
     if (!fullProblem) {
       return res.status(404).json({
-        status:404,
+        status: 404,
         message: "Err: Problem not found in the DB",
       });
     }

@@ -46,9 +46,21 @@ async function main() {
         },
         StarterCode:
           "//Write your code here\n" +
-          "function solution(nums) {\n" +
+          "function solution(nums, target) {\n" +
           "  \n" +
           "}",
+
+        problemEvalCode: {
+          javascript: `function EvalUserCode(testcases) {
+  let result = {};
+  Object.keys(testcases).map((key) => {
+    result[key] = solution(testcases[key].nums, testcases[key].target);
+  })
+  return result;
+}`,
+          cpp: ``,
+        },
+        langSupport: ["javascript", "cpp"],
       },
       {
         AcceptanceRate: 61.6,
@@ -76,9 +88,20 @@ async function main() {
         },
         StarterCode:
           "//Write your code here\n" +
-          "function solution(nums) {\n" +
+          "function solution(nums, target) {\n" +
           "  \n" +
           "}",
+        problemEvalCode: {
+          javascript: `function EvalUserCode(testcases)
+{ let result = {};
+  Object.keys(testcases).map((key) => {
+    result[key] = solution(testcases[key].nums, testcases[key].target);
+  })
+  return result;
+}`,
+          cpp: ``,
+        },
+        langSupport: ["javascript", "cpp"],
       },
     ],
   });

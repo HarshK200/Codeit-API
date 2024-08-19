@@ -19,9 +19,6 @@ async function connectToRabbitMQ() {
 
   const channelWrapper = connection.createChannel({
     setup: function (channel) {
-      if (fs.existsSync("temp")) {
-        fs.promises.rm("temp", { recursive: true });
-      }
       // Note that `this` here is the channelWrapper instance.
       return Promise.all([
         channel.assertQueue(QUEUE, { durable: false }), // non-presisting message
@@ -45,8 +42,13 @@ async function onMessage(msg) {
   }
   // appending testcases to the code to make it executable
   const codeToExecute = await getExecutionCode(data);
+
+  // WARN: FOR TESTING PURPOSES ONLY--------------------------------------------
+  // await fs.promises.writeFile("soltest.js", codeToExecute);
+  // WARN: FOR TESTING PURPOSES ONLY--------------------------------------------
+
   if (!codeToExecute) {
-    console.log("WARN: Discarding msg, invalied language provided");
+    console.log("WARN: Discarding msg, err getting ExecutionCode");
     return;
   }
   generateTempFiles(codeToExecute); // create a temp directory and write the codeToExecute to temp/solution.js

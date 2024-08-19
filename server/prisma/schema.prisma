@@ -40,15 +40,17 @@ model Users {
 }
 
 model Problems {
-    id             Int           @id @unique @default(autoincrement())
-    title          String
-    description    String
-    examples       Json
-    testCases      Json // This is going to be a JSON string object with mulitple testcases
-    Submissions    Submissions[] // Relation to the Submissions of this problem
-    difficulty     Difficulty
-    AcceptanceRate Float
-    StarterCode    String // Starter code for this problem
+    id              Int           @id @unique @default(autoincrement())
+    title           String
+    description     String
+    examples        Json
+    testCases       Json // This is going to be a JSON string object with mulitple testcases
+    Submissions     Submissions[] // Relation to the Submissions of this problem
+    difficulty      Difficulty
+    AcceptanceRate  Float
+    StarterCode     String // Starter code for this problem
+    problemEvalCode Json
+    langSupport     String[]
 }
 
 model Submissions {
