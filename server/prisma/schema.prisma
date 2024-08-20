@@ -48,7 +48,7 @@ model Problems {
     Submissions     Submissions[] // Relation to the Submissions of this problem
     difficulty      Difficulty
     AcceptanceRate  Float
-    StarterCode     String // Starter code for this problem
+    StarterCode     Json // Starter code for this problem
     problemEvalCode Json
     langSupport     String[]
 }

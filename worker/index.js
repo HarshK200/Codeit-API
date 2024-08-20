@@ -44,7 +44,7 @@ async function onMessage(msg) {
   const codeToExecute = await getExecutionCode(data);
 
   // WARN: FOR TESTING PURPOSES ONLY--------------------------------------------
-  // await fs.promises.writeFile("soltest.js", codeToExecute);
+  await fs.promises.writeFile("soltest.js", codeToExecute);
   // WARN: FOR TESTING PURPOSES ONLY--------------------------------------------
 
   if (!codeToExecute) {

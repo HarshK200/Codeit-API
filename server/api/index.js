@@ -9,6 +9,7 @@ const {
   updateExecutionState,
   getSubmissionState,
 } = require("./controllers/updateExecutionState");
+const { createProblem } = require("./controllers/ProblemsController");
 
 // Parsing all the req objects
 app.use(express.json());
@@ -23,6 +24,7 @@ app.use("/problemset", problemsetRouter);
 app.use("/user", auth, userRouter);
 
 // TODO make route to create a new problem
+app.post("/createproblem", createProblem)
 
 // WIP: add route/webhook where the worker will hit after it's done executing user code (This route updates the data base)
 app.post("/execution_finished", updateExecutionState);

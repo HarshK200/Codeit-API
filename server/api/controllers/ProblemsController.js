@@ -1,6 +1,8 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
+const fs = require("node:fs").promises;
+
 async function getProblemsList(req, res) {
   try {
     const problems = await prisma.problems.findMany({
@@ -64,4 +66,44 @@ async function getFullProblem(req, res) {
   }
 }
 
-module.exports = { getProblemsList, getFullProblem };
+async function createProblem(req, res) {
+  function stringToJsonStr(str) {
+    // does some string replacing to make the string valid and json parsable
+    let validJsonString = str.replace(/(\w+):/g, '"$1":');
+    validJsonString = validJsonString.replace(/,(\s*[}\]])/g, "$1");
+    return validJsonString;
+  }
+
+  const problemToCreate = req.body;
+  try {
+    console.log(problemToCreate);
+
+    const newProblem = await prisma.problems.create({
+      data: {
+        title: problemToCreate.title,
+        description: problemToCreate.description,
+        examples: JSON.parse(stringToJsonStr(problemToCreate.examples)),
+        testCases: JSON.parse(stringToJsonStr(problemToCreate.testCases)),
+        difficulty: problemToCreate.difficulty,
+        AcceptanceRate: parseInt(problemToCreate.AcceptanceRate),
+        StarterCode: problemToCreate.StarterCode,
+        langSupport: problemToCreate.langSupport,
+        problemEvalCode: problemToCreate.problemEvalCode,
+      },
+    });
+
+    res.status(200).json({
+      message: "problem created Successfully!",
+      link: `/problemset/${newProblem.id}`,
+      problem: newProblem,
+    });
+  } catch (e) {
+    console.log(e);
+    res.status(400).json({
+      message: "Err: please check if all the fields are provided",
+      err: e,
+    });
+  }
+}
+
+module.exports = { getProblemsList, getFullProblem, createProblem };

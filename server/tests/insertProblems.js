@@ -44,20 +44,23 @@ async function main() {
             output: [0, 1],
           },
         },
-        StarterCode:
-          "//Write your code here\n" +
-          "function solution(nums, target) {\n" +
-          "  \n" +
-          "}",
+        StarterCode: {
+          javascript:
+            "//Write your code here\n" +
+            "function solution(nums, target) {\n" +
+            "  \n" +
+            "}",
+        },
 
         problemEvalCode: {
-          javascript: `function EvalUserCode(testcases) {
-  let result = {};
-  Object.keys(testcases).map((key) => {
-    result[key] = solution(testcases[key].nums, testcases[key].target);
-  })
-  return result;
-}`,
+          javascript:
+            "function EvalUserCode(testcases) {\n" +
+            "  let result = {};\n" +
+            "  Object.keys(testcases).map((key) => {\n" +
+            "    result[key] = solution(testcases[key].nums, testcases[key].target);\n" +
+            "  })\n" +
+            "return result;\n" +
+            "}\n",
           cpp: ``,
         },
         langSupport: ["javascript", "cpp"],
@@ -86,11 +89,13 @@ async function main() {
             input: [0],
           },
         },
-        StarterCode:
-          "//Write your code here\n" +
-          "function solution(nums, target) {\n" +
-          "  \n" +
-          "}",
+        StarterCode: {
+          javascript:
+            "//Write your code here\n" +
+            "function solution(nums, target) {\n" +
+            "  \n" +
+            "}",
+        },
         problemEvalCode: {
           javascript: `function EvalUserCode(testcases)
 { let result = {};

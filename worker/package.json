@@ -17,8 +17,8 @@
     "nodemon": "^3.1.4"
   },
   "nodemonConfig": {
-    "ignore": [
-      "temp/**"
+    "watch": [
+      "index.js"
     ]
   }
 }
