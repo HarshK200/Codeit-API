@@ -5,23 +5,16 @@ async function generateTempFiles(folderName, executableCode, language) {
   console.log("generating temp for current run...");
   await fs.promises.mkdir(folderName, { recursive: true });
   try {
-    switch (language) {
-      case "javascript":
-        await fs.promises.writeFile(
-          folderName + "/solution.js",
-          executableCode,
-        );
-        break;
-
-      case "cpp":
-        await fs.promises.writeFile(
-          folderName + "/solution.cpp",
-          executableCode,
-        );
-
-      default:
-        throw new Error("invalid user-code language provided");
+    if (language === "javascript") {
+      await fs.promises.writeFile(folderName + "/solution.js", executableCode);
+      return;
     }
+    if (language === "cpp") {
+      await fs.promises.writeFile(folderName + "/solution.cpp", executableCode);
+      return;
+    }
+
+    throw new Error("invalid user-code language provided");
   } catch (e) {
     console.log(e);
     await fs.promises.rm(folderName, { recursive: true });
