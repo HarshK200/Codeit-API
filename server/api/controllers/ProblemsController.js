@@ -60,6 +60,7 @@ async function getFullProblem(req, res) {
       problem: fullProblem,
     });
   } catch (err) {
+    console.log(err);
     return res.status(500).json({
       message: "Err: something went wrong during getting the problems",
     });

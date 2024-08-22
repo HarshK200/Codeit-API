@@ -1,10 +1,15 @@
-FROM node:20-alpine AS base
+FROM alpine:latest AS base
+# Set the working directory
+RUN apk add g++ nodejs npm \
+    rm -rf var/cache
+
+FROM base as Install
 COPY package* .
 RUN npm install
 
-FROM node:20-alpine AS development
+FROM base AS development
 WORKDIR /worker
 COPY . .
-COPY --from=base ./node_modules ./node_modules
+COPY --from=Install ./node_modules ./node_modules
 
 CMD ["npm", "start"]

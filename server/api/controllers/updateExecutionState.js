@@ -1,6 +1,7 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
+// WEBHOOK
 // IMPORTANT! only accessed by the worker node
 async function updateExecutionState(req, res) {
   /*
@@ -8,12 +9,13 @@ async function updateExecutionState(req, res) {
       result: Object,
       stdout: stdout,
       stderr: stderr,
+      stdErrType: "Runtime_Error",
       submissionId: data.submissionId,
   }
 */
 
   const data = req.body;
-  const result = data.result;
+  const result = JSON.parse(data.result);
   let isCorrect = true;
   Object.keys(result).map((key) => {
     if (!result[key].passed) {
@@ -22,12 +24,26 @@ async function updateExecutionState(req, res) {
     }
   });
 
+  if (data.stderr !== "") {
+    await prisma.submissions.update({
+      where: {
+        id: data.submissionId,
+      },
+      data: {
+        ExecutionStat: data.stdErrType,
+        testCasesResult: data.result,
+        stdout: data.stdout,
+        stderr: data.stderr,
+      },
+    });
+    return;
+  }
   await prisma.submissions.update({
     where: {
       id: data.submissionId,
     },
     data: {
-      SubmissionStat: isCorrect ? "CORRECT" : "INCORRECT",
+      ExecutionStat: isCorrect ? "Accepted" : "Wrong Answer",
       testCasesResult: data.result,
       stdout: data.stdout,
       stderr: data.stderr,

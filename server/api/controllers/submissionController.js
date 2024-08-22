@@ -63,12 +63,12 @@ async function postSubmission(req, res) {
     let submission = await prisma.submissions.create({
       data: {
         answer: answer,
-        SubmissionStat: "PENDING",
         usersId: userId,
         problemsId: problemId,
         testCasesResult: "PENDING",
         stdout: "PENDING",
         stderr: "PENDING",
+        ExecutionStat: "PENDING",
       },
     });
 

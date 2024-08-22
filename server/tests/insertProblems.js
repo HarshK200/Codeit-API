@@ -44,12 +44,17 @@ async function main() {
             output: [0, 1],
           },
         },
+
         StarterCode: {
           javascript:
             "//Write your code here\n" +
             "function solution(nums, target) {\n" +
             "  \n" +
             "}",
+          cpp:
+            "std::vector<int> solution(std::vector<int> nums) {" +
+            "\n//write your code here" +
+            "\n}",
         },
 
         problemEvalCode: {
@@ -61,10 +66,11 @@ async function main() {
             "  })\n" +
             "return result;\n" +
             "}\n",
-          cpp: ``,
+          cpp: "",
         },
         langSupport: ["javascript", "cpp"],
       },
+
       {
         AcceptanceRate: 61.6,
         difficulty: "EASY",
@@ -95,6 +101,9 @@ async function main() {
             "function solution(nums, target) {\n" +
             "  \n" +
             "}",
+          cpp: `std::vector<int> solution(std::vector<int> nums) {
+  //write your code here
+}`,
         },
         problemEvalCode: {
           javascript: `function EvalUserCode(testcases)
