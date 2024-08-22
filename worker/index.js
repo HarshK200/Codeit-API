@@ -1,6 +1,9 @@
 import fs from "node:fs";
 import { connect } from "amqp-connection-manager";
-import { deleteTempFiles, generateTempFiles } from "./utils/tempFileController.js";
+import {
+  deleteTempFiles,
+  generateTempFiles,
+} from "./utils/tempFileController.js";
 import getExecutionCode from "./utils/getExecutionCode.js";
 import executeCode from "./utils/handleExecution.js";
 import axios from "axios";
@@ -47,19 +50,15 @@ async function onMessage(msg, channelWrapper) {
   const folderName = "temp/" + data.userId;
   const codeToExecute = await getExecutionCode(data, folderName);
 
-  // WARN: FOR TESTING PURPOSES ONLY--------------------------------------------
-  // if (data.language.toLowerCase() === "javascript") {
-  //   await fs.promises.writeFile("soltest.js", codeToExecute);
-  // } else {
-  //   await fs.promises.writeFile("soltest.cpp", codeToExecute);
-  // }
-  // WARN: FOR TESTING PURPOSES ONLY--------------------------------------------
-
   if (!codeToExecute) {
     console.log("WARN: Discarding msg, err getting ExecutionCode");
     return;
   }
-  await generateTempFiles(folderName ,codeToExecute, data.language.toLowerCase()); // create a temp directory and write the codeToExecute to temp/solution.*
+  await generateTempFiles(
+    folderName,
+    codeToExecute,
+    data.language.toLowerCase(),
+  ); // create a temp directory and write the codeToExecute to temp/solution.*
   const result = await executeCode(data, folderName);
   await deleteTempFiles(folderName);
 

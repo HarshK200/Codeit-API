@@ -9,10 +9,6 @@ async function generateTempFiles(folderName, executableCode, language) {
       await fs.promises.writeFile(folderName + "/solution.js", executableCode);
       return;
     }
-    if (language === "cpp") {
-      await fs.promises.writeFile(folderName + "/solution.cpp", executableCode);
-      return;
-    }
 
     throw new Error("invalid user-code language provided");
   } catch (e) {
@@ -24,7 +20,6 @@ async function generateTempFiles(folderName, executableCode, language) {
 async function deleteTempFiles(folderName) {
   try {
     await fs.promises.access(folderName, fs.constants.F_OK);
-    console.log("clearing temp from the run...");
     await fs.promises.rm(folderName, { recursive: true });
   } catch (err) {
     console.log(err);

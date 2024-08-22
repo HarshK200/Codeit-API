@@ -70,53 +70,6 @@ async function main() {
         },
         langSupport: ["javascript", "cpp"],
       },
-
-      {
-        AcceptanceRate: 61.6,
-        difficulty: "EASY",
-        title: "Move Zeroes",
-        description:
-          "Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.\nNote that you must do this in-place without making a copy of the array.",
-        examples: {
-          0: {
-            input: [0, 1, 0, 3, 12],
-            output: [1, 3, 12, 0, 0],
-          },
-          1: {
-            input: [0],
-            output: [0],
-          },
-        },
-        testCases: {
-          0: {
-            input: [0, 1, 0, 3, 12],
-          },
-          1: {
-            input: [0],
-          },
-        },
-        StarterCode: {
-          javascript:
-            "//Write your code here\n" +
-            "function solution(nums, target) {\n" +
-            "  \n" +
-            "}",
-          cpp: `std::vector<int> solution(std::vector<int> nums) {
-  //write your code here
-}`,
-        },
-        problemEvalCode: {
-          javascript: `function EvalUserCode(testcases)
-{ let result = {};
-  Object.keys(testcases).map((key) => {
-    result[key] = solution(testcases[key].nums, testcases[key].target);
-  })
-  return result;
-}`,
-          cpp: ``,
-        },
-        langSupport: ["javascript", "cpp"],
-      },
     ],
   });
   console.log(result);

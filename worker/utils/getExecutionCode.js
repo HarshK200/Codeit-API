@@ -15,20 +15,10 @@ export default async function getExecutionCode(data, folderName) {
   const userCode = data.answer;
   const problemEvalCode = data.problem.problemEvalCode[language];
   let finalExecutionCode;
-  // console.log(language === "cpp")
 
   try {
     if (language === "javascript") {
       finalExecutionCode = await getJsExecCode(
-        userCode,
-        problemEvalCode,
-        data,
-        folderName,
-      );
-      return finalExecutionCode;
-    }
-    if (language === "cpp") {
-      finalExecutionCode = await getCppExecCode(
         userCode,
         problemEvalCode,
         data,
@@ -56,18 +46,5 @@ async function getJsExecCode(userCode, problemEvalCode, data, folderName) {
     `\nconst testcases = ${JSON.stringify(data.problem.testCases)};\n` + // adding the test cases
     mainjsCode + // the main code that calls the evalfunction writes result.json
     `fs.promises.writeFile("${folderName}" + "/result.json", JSON.stringify(result));`;
-  return finalCode;
-}
-
-async function getCppExecCode(userCode, problemEvalCode, data, folderName) {
-  const mainjsCode = await fs.promises.readFile("./lang/main.cpp", "utf8");
-  const finalCode =
-    `#include "../../include/structs.hpp"\n` +
-    `json jsonStr = json::parse(R"(${JSON.stringify(data.problem.testCases)})");\n` + // adding the test cases
-    userCode +
-    problemEvalCode +
-    mainjsCode + // the main code that calls the evalfunction writes result.json
-    `//add string to write the result as json in result.json`; //TODO:
-
   return finalCode;
 }
