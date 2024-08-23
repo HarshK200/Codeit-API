@@ -13,12 +13,15 @@ const { createProblem } = require("./controllers/ProblemsController");
 
 // Parsing all the req objects
 app.use(express.json());
-app.use(cors())
+app.use(cors());
 app.use(
   cors({
     origin: process.env.FRONTEND_URL, // Your front-end URL
-    methods: ["POST"],
-    credentials: true,
+  }),
+);
+app.use(
+  cors({
+    origin: process.env.WORKER_URL, // Your front-end URL
   }),
 );
 

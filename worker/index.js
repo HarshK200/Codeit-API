@@ -70,6 +70,7 @@ async function onMessage(msg, channelWrapper) {
   } catch (e) {
     console.log(
       "Axios err during sending the response: Make sure result is defined or not null",
+      e,
     );
   }
 }
