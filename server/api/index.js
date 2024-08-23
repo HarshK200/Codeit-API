@@ -13,13 +13,7 @@ const { createProblem } = require("./controllers/ProblemsController");
 
 // Parsing all the req objects
 app.use(express.json());
-app.use(
-  cors({
-    origin: [process.end.FRONTEND_URL, "http://localhost:3000"],
-    methods: "GET,POST",
-    allowedHeaders: "Content-Type,Authorization",
-  }),
-);
+app.use(cors())
 
 // Routes
 app.post("/signup", signup);
