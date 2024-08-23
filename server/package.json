@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./api/index.js",
-    "test": "node ./tests/test.js"
+    "start": "node ./api/index.js",
+    "dev": "nodemon ./tests/test.js"
   },
   "author": "",
   "license": "MIT",
