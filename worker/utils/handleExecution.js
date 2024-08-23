@@ -28,6 +28,7 @@ function executeJsCode(data, folderName) {
       async (err, stdout, stderr) => {
         // In case of execution err for e.g. Syntax err
         if (err) {
+          console.log(err);
           let testCasesResult = {};
           Object.keys(data.problem.testCases).map((key) => {
             testCasesResult[key] = { passed: false };
@@ -52,6 +53,7 @@ function executeJsCode(data, folderName) {
         try {
           Object.keys(data.problem.testCases).map((key) => {
             if (Object.keys(result).length === 0) {
+              console.log("err: result is empty: ", result);
               testCasesResult[key] = {
                 passed: false,
                 expected_output: data.problem.testCases[key].output,
