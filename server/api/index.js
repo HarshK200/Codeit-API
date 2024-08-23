@@ -13,7 +13,13 @@ const { createProblem } = require("./controllers/ProblemsController");
 
 // Parsing all the req objects
 app.use(express.json());
-app.use(cors())
+app.use(
+  cors({
+    origin: "https://codeit-frontend.vercel.app/",
+    methods: "GET,POST",
+    allowedHeaders: "Content-Type,Authorization",
+  }),
+);
 
 // Routes
 app.post("/signup", signup);
