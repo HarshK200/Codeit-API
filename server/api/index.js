@@ -19,11 +19,6 @@ app.use(
     origin: process.env.FRONTEND_URL, // Your front-end URL
   }),
 );
-app.use(
-  cors({
-    origin: process.env.WORKER_URL, // Your front-end URL
-  }),
-);
 
 // Routes
 app.post("/signup", signup);
