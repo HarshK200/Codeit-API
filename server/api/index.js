@@ -15,7 +15,7 @@ const { createProblem } = require("./controllers/ProblemsController");
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://codeit-frontend.vercel.app/",
+    origin: [process.end.FRONTEND_URL, "http://localhost:3000"],
     methods: "GET,POST",
     allowedHeaders: "Content-Type,Authorization",
   }),
